@@ -1,9 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net9.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>TestingVial.NET</Title>
+    <RepositoryUrl>https://github.com/TestingVial/TestingVial.NET</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/TestingVial/TestingVial.NET</PackageProjectUrl>
+    <Description>A C# implementation for the Testing Vial attribute.
+It allows developers to tag their tests by category, following the Testing Vial approach.</Description>
+    <PackageTags>testing;testing-vial;</PackageTags>
+    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <Company>TestingVial</Company>
+    <Authors>DavideBellone</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0|AnyCPU'">
+    <IsTrimmable>False</IsTrimmable>
+    <IsAotCompatible>False</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0|AnyCPU'">
+    <IsTrimmable>False</IsTrimmable>
+    <IsAotCompatible>False</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
