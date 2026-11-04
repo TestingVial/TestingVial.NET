@@ -146,6 +146,21 @@ TestingVial.NET provides built-in attributes for common test types:
 
 The test type of each built-in attribute is `"Unit"`, `"Integration"` and `"E2E"`.
 
+#### Generic Vials
+
+When a test belongs to a vial but you don't want to pick a test type, use `TestingVial`:
+
+```cs
+// Generic syntax with type safety 
+[TestingVial<CartVial>(Description = "Carts can have products added")]
+
+// Non-generic syntax with string name 
+[TestingVial("Cart", Description = "Carts can have products added")]
+```
+
+A generic vial has no test type: its `TestType` is `null`, and tools such as
+[Pipette.NET](https://github.com/TestingVial/Pipette.NET) write the entry without one.
+
 ### Multiple Vials
 
 You can apply multiple vials to a single test to indicate it covers multiple features:
@@ -162,7 +177,8 @@ public void AddToCart_WithMultipleQuantity_AddsAllProducts()
 
 ### Creating Custom Test Type Vials
 
-You can create your own test type vials by inheriting from `VialAttribute` or `TestingVialAttribute<T>`:
+You can create your own test type vials by inheriting from `VialAttribute` or `TestingVialAttribute<T>` and passing the
+test type to the base constructor:
 
 ```cs
 public class PerformanceTestVial<T> 

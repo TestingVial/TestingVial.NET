@@ -64,5 +64,17 @@ namespace TestingVial.Examples
             Assert.That(total, Is.EqualTo(400.00m));
         }
 
+        [Test]
+        [TestingVial<CartVial>(Description = "An empty cart costs nothing")]
+        [TestingVial("Product", Description = "Products not in a cart don't count towards its total")]
+        public void GetCartTotal_WithEmptyCart_ReturnsZero()
+        {
+            var cart = new Cart(1);
+
+            var total = _sut.GetCartTotal(cart);
+
+            Assert.That(total, Is.EqualTo(0m));
+        }
+
     }
 }

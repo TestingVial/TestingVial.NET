@@ -15,13 +15,23 @@ namespace TestingVial.Examples
             yield return new TestCaseData(new IntegrationTestVial("Product"), "Product", "Integration");
             yield return new TestCaseData(new EndToEndTestVial<CartVial>(), "Cart", "E2E");
             yield return new TestCaseData(new EndToEndTestVial("Product"), "Product", "E2E");
+            yield return new TestCaseData(new TestingVialAttribute<CartVial>(), "Cart", null);
+            yield return new TestCaseData(new TestingVialAttribute("Product"), "Product", null);
         }
 
         [TestCaseSource(nameof(BuiltInVials))]
-        public void BuiltInVial_HasVialNameAndTestType(VialAttribute vial, string expectedName, string expectedTestType)
+        public void BuiltInVial_HasVialNameAndTestType(VialAttribute vial, string expectedName, string? expectedTestType)
         {
             Assert.That(vial.VialName, Is.EqualTo(expectedName));
             Assert.That(vial.TestType, Is.EqualTo(expectedTestType));
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void GenericVial_WithoutName_Throws(string? name)
+        {
+            Assert.That(() => new TestingVialAttribute(name!), Throws.InstanceOf<ArgumentException>());
         }
     }
 }

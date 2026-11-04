@@ -29,6 +29,8 @@ namespace TestingVial.NET.Analyzers.Tests
         [TestCase("TestingVial.NET.UnitTestVial(\"Cart\")")]
         [TestCase("PerformanceTestVial(\"Cart\")")]
         [TestCase("SmokeVial<CartVial>")]
+        [TestCase("TestingVial<CartVial>")]
+        [TestCase("TestingVial(\"Cart\")")]
         public async Task VialAttribute_WithoutDescription_Warns(string attribute)
         {
             var source = Header + $"public class CartTests {{ [{attribute}] public void M() {{ }} }}";
@@ -66,6 +68,8 @@ namespace TestingVial.NET.Analyzers.Tests
         [TestCase("UnitTestVial(\"Cart\", Description = Texts.Added)")]
         [TestCase("PerformanceTestVial(\"Cart\", Description = \"Fast\")")]
         [TestCase("SmokeVial<CartVial>(Description = \"Smoke\")")]
+        [TestCase("TestingVial<CartVial>(Description = \"Carts can have products added\")")]
+        [TestCase("TestingVialAttribute(\"Cart\", Description = \"Carts can have products added\")")]
         [TestCase("System.Obsolete")]
         public async Task DescribedVialsAndOtherAttributes_DoNotWarn(string attribute)
         {
