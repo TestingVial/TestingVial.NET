@@ -1,6 +1,7 @@
 # TestingVial.NET
 
 [![NuGet](https://img.shields.io/nuget/v/TestingVial.NET.svg)](https://www.nuget.org/packages/TestingVial.NET/)
+[![CI](https://github.com/TestingVial/TestingVial.NET/actions/workflows/ci.yml/badge.svg)](https://github.com/TestingVial/TestingVial.NET/actions/workflows/ci.yml)
 
 A C# implementation of the Testing Vial attribute pattern for better test organization and traceability.
 
@@ -174,7 +175,7 @@ public class PerformanceTestVial
 - **Inheritance support** - vials are inherited by derived classes
 - **Extensible** - create your own test type vials
 - **Description support** for documenting vial purposes
-- Compatible with **.NET 9** and **.NET 10**
+- Compatible with **.NET 8**, **.NET 9** and **.NET 10**
 - Uses **C# 13.0** features
 
 ## Benefits

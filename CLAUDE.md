@@ -14,9 +14,9 @@ dotnet test TestingVial.NET.slnx
 ```
 
 - `TestingVial.NET/` — the library, multi-targeting net8.0, net9.0, net10.0, no dependencies.
-- `TestingVial.Examples/` — NUnit examples on net9.0 (project reference to the library); doubles as the only test project.
-  Running it needs the .NET 9 runtime, which isn't installed on every dev machine.
-- No CI workflow yet.
+- `TestingVial.Examples/` — NUnit examples on net8.0 and net10.0, the LTS frameworks (project reference to the library);
+  doubles as the only test project. Running it needs only the .NET 8 and 10 runtimes.
+- CI: `.github/workflows/ci.yml` builds, tests and packs on every pull request and on push to `main`.
 
 ## Public API (all in namespace `TestingVial.NET`)
 
