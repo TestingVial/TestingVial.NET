@@ -10,14 +10,20 @@
     <Description>A C# implementation for the Testing Vial attribute.
 It allows developers to tag their tests by category, following the Testing Vial approach.</Description>
     <PackageTags>testing;testing-vial;</PackageTags>
-    <AssemblyVersion>0.0.1</AssemblyVersion>
     <Company>TestingVial</Company>
     <Authors>DavideBellone</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
-    <FileVersion>1.0.0.1</FileVersion>
-    <PackageVersion>1.0.1</PackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- The only version to edit when releasing (see RELEASING.md). Package (Version), file and assembly versions derive
+         from it; a prerelease adds -p:VersionSuffix=... -->
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <FileVersion>$(VersionPrefix).0</FileVersion>
+    <!-- Fixed per major version, so assemblies built against any 1.x bind to any other 1.x. -->
+    <AssemblyVersion>$(VersionPrefix.Split('.')[0]).0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0|AnyCPU'">

@@ -36,6 +36,6 @@ end up in `.vial` files and must map to a value the VialSchemas schema allows.
 
 ## Packaging
 
-Versions live in `TestingVial.NET/TestingVial.NET.csproj` (`PackageVersion`, `AssemblyVersion`, `FileVersion`). They are currently
-inconsistent (1.0.1 / 0.0.1 / 1.0.0.1); keep them aligned when releasing. The package ships the root `README.md` (the user
+The version is the single `<VersionPrefix>` in `TestingVial.NET/TestingVial.NET.csproj`; package and file versions derive from it and
+`AssemblyVersion` is `<major>.0.0.0`. Don't add `PackageVersion`/`FileVersion` back. Release steps: `RELEASING.md`. The package ships the root `README.md` (the user
 documentation — update it with any API change) and `icon.png`.
