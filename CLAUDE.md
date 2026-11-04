@@ -22,7 +22,8 @@ dotnet test TestingVial.NET.slnx
 
 `IVial` (`Name`), abstract `VialAttribute` (`VialName`, `TestType`, `Description`; ctor `(name, testType)`), abstract
 `TestingVialAttribute<T>` (`: base(new T().Name, testType)`), and `UnitTestVial`/`UnitTestVial<T>`,
-`IntegrationTestVial`/`IntegrationTestVial<T>`.
+`IntegrationTestVial`/`IntegrationTestVial<T>`, `EndToEndTestVial`/`EndToEndTestVial<T>` (test types `"Unit"`,
+`"Integration"`, `"E2E"`).
 
 **Pipette.NET depends on this API through Roslyn**, by metadata name and constructor shape, not by compiling against it. Treat
 any rename or signature change of these types, their properties, or their constructor parameters as a breaking change that must

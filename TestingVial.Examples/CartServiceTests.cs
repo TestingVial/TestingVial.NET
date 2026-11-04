@@ -47,6 +47,7 @@ namespace TestingVial.Examples
         }
 
         [Test]
+        [EndToEndTestVial<CartVial>(Description = "A customer can fill a cart in several steps and see its total")]
         public void AddToCart_WithExistingCart_AppendsProducts()
         {
             // Arrange
