@@ -14,8 +14,12 @@ dotnet test TestingVial.NET.slnx
 ```
 
 - `TestingVial.NET/` — the library, multi-targeting net8.0, net9.0, net10.0, no dependencies.
+- `TestingVial.NET.Analyzers/` — Roslyn analyzers (netstandard2.0, Microsoft.CodeAnalysis 4.8 so they load in the .NET 8 SDK),
+  packed into the library's package under `analyzers/dotnet/cs`. Rule `TV0001`: vial attribute without a `Description`. New
+  rules go in `AnalyzerReleases.Unshipped.md` and get a README section (the diagnostic's help link points at it).
+- `TestingVial.NET.Analyzers.Tests/` — NUnit tests that compile snippets in memory and run the analyzers on them.
 - `TestingVial.Examples/` — NUnit examples on net8.0 and net10.0, the LTS frameworks (project reference to the library);
-  doubles as the only test project. Running it needs only the .NET 8 and 10 runtimes.
+  also tests the attributes. Running the tests needs only the .NET 8 and 10 runtimes.
 - CI: `.github/workflows/ci.yml` builds, tests and packs on every pull request and on push to `main`.
 
 ## Public API (all in namespace `TestingVial.NET`)

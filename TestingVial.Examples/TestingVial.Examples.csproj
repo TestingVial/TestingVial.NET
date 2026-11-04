@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestingVial.NET\TestingVial.NET.csproj" />
+    <!-- As package users get it: the analyzer runs on these examples. -->
+    <ProjectReference Include="..\TestingVial.NET.Analyzers\TestingVial.NET.Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
