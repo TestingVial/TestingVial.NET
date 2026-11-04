@@ -21,7 +21,7 @@ namespace TestingVial.NET.Analyzers
         private static readonly DiagnosticDescriptor Rule = new(
             DiagnosticId,
             title: "Vial attribute has no Description",
-            messageFormat: "'{0}' has no Description; describe what the test verifies about the vial",
+            messageFormat: "'{0}' has no Description; entity description is what makes the Testing Vial strategy powerful",
             category: "Usage",
             defaultSeverity: DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
