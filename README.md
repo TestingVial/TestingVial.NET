@@ -134,6 +134,18 @@ TestingVial.NET provides built-in attributes for common test types:
 [IntegrationTestVial("Payment", Description = "Tests payment processing")]
 ```
 
+#### End-to-End Tests
+
+```cs
+// Generic syntax with type safety 
+[EndToEndTestVial<CheckoutVial>(Description = "A customer can pay for a cart")]
+
+// Non-generic syntax with string name 
+[EndToEndTestVial("Checkout", Description = "A customer can pay for a cart")]
+```
+
+The test type of each built-in attribute is `"Unit"`, `"Integration"` and `"E2E"`.
+
 ### Multiple Vials
 
 You can apply multiple vials to a single test to indicate it covers multiple features:
