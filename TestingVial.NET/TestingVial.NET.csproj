@@ -42,6 +42,12 @@ It allows developers to tag their tests by category, following the Testing Vial 
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Built for packing only: the analyzer ships in analyzers/dotnet/cs and is not a dependency of the library. -->
+    <ProjectReference Include="..\TestingVial.NET.Analyzers\TestingVial.NET.Analyzers.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <None Include="..\TestingVial.NET.Analyzers\bin\$(Configuration)\netstandard2.0\TestingVial.NET.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

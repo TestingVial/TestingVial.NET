@@ -178,6 +178,27 @@ public class PerformanceTestVial
     }
 ```
 
+## Analyzers
+
+The package includes a Roslyn analyzer, so these warnings show up in your IDE and in `dotnet build` with no extra setup.
+
+### TV0001: Vial attribute has no Description
+
+Every vial should say what the test verifies. A vial attribute (built-in or custom) without a `Description`, or with an empty
+or whitespace one, produces warning **TV0001**:
+
+```cs
+[UnitTestVial<CartVial>]                                     // TV0001
+[UnitTestVial<CartVial>(Description = "")]                   // TV0001
+[UnitTestVial<CartVial>(Description = "Carts can have products added")]   // OK
+```
+
+`Description` is still optional for the compiler. Tools that read the attributes, such as
+[Pipette.NET](https://github.com/TestingVial/Pipette.NET), use the test method name (or the class name, for a class-level
+attribute) when it's missing.
+
+To change the severity, use `.editorconfig`, e.g. `dotnet_diagnostic.TV0001.severity = error`, or `none` to turn it off.
+
 
 ## Features
 
