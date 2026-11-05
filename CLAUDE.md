@@ -14,15 +14,20 @@ dotnet test TestingVial.NET.slnx
 ```
 
 - `TestingVial.NET/` — the library, multi-targeting net8.0, net9.0, net10.0, no dependencies.
-- `TestingVial.Examples/` — NUnit examples on net9.0 (project reference to the library); doubles as the only test project.
-  Running it needs the .NET 9 runtime, which isn't installed on every dev machine.
-- No CI workflow yet.
+- `TestingVial.NET.Analyzers/` — Roslyn analyzers (netstandard2.0, Microsoft.CodeAnalysis 4.8 so they load in the .NET 8 SDK),
+  packed into the library's package under `analyzers/dotnet/cs`. Rule `TV0001`: vial attribute without a `Description`. New
+  rules go in `AnalyzerReleases.Unshipped.md` and get a README section (the diagnostic's help link points at it).
+- `TestingVial.NET.Analyzers.Tests/` — NUnit tests that compile snippets in memory and run the analyzers on them.
+- `TestingVial.Examples/` — NUnit examples on net8.0 and net10.0, the LTS frameworks (project reference to the library);
+  also tests the attributes. Running the tests needs only the .NET 8 and 10 runtimes.
+- CI: `.github/workflows/ci.yml` builds, tests and packs on every pull request and on push to `main`.
 
 ## Public API (all in namespace `TestingVial.NET`)
 
 `IVial` (`Name`), abstract `VialAttribute` (`VialName`, `TestType`, `Description`; ctor `(name, testType)`), abstract
 `TestingVialAttribute<T>` (`: base(new T().Name, testType)`), and `UnitTestVial`/`UnitTestVial<T>`,
-`IntegrationTestVial`/`IntegrationTestVial<T>`.
+`IntegrationTestVial`/`IntegrationTestVial<T>`, `EndToEndTestVial`/`EndToEndTestVial<T>` (test types `"Unit"`,
+`"Integration"`, `"E2E"`).
 
 **Pipette.NET depends on this API through Roslyn**, by metadata name and constructor shape, not by compiling against it. Treat
 any rename or signature change of these types, their properties, or their constructor parameters as a breaking change that must
@@ -31,6 +36,6 @@ end up in `.vial` files and must map to a value the VialSchemas schema allows.
 
 ## Packaging
 
-Versions live in `TestingVial.NET/TestingVial.NET.csproj` (`PackageVersion`, `AssemblyVersion`, `FileVersion`). They are currently
-inconsistent (1.0.1 / 0.0.1 / 1.0.0.1); keep them aligned when releasing. The package ships the root `README.md` (the user
+The version is the single `<VersionPrefix>` in `TestingVial.NET/TestingVial.NET.csproj`; package and file versions derive from it and
+`AssemblyVersion` is `<major>.0.0.0`. Don't add `PackageVersion`/`FileVersion` back. Release steps: `RELEASING.md`. The package ships the root `README.md` (the user
 documentation — update it with any API change) and `icon.png`.

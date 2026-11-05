@@ -1,6 +1,7 @@
 # TestingVial.NET
 
 [![NuGet](https://img.shields.io/nuget/v/TestingVial.NET.svg)](https://www.nuget.org/packages/TestingVial.NET/)
+[![CI](https://github.com/TestingVial/TestingVial.NET/actions/workflows/ci.yml/badge.svg)](https://github.com/TestingVial/TestingVial.NET/actions/workflows/ci.yml)
 
 A C# implementation of the Testing Vial attribute pattern for better test organization and traceability.
 
@@ -133,6 +134,18 @@ TestingVial.NET provides built-in attributes for common test types:
 [IntegrationTestVial("Payment", Description = "Tests payment processing")]
 ```
 
+#### End-to-End Tests
+
+```cs
+// Generic syntax with type safety 
+[EndToEndTestVial<CheckoutVial>(Description = "A customer can pay for a cart")]
+
+// Non-generic syntax with string name 
+[EndToEndTestVial("Checkout", Description = "A customer can pay for a cart")]
+```
+
+The test type of each built-in attribute is `"Unit"`, `"Integration"` and `"E2E"`.
+
 ### Multiple Vials
 
 You can apply multiple vials to a single test to indicate it covers multiple features:
@@ -165,6 +178,27 @@ public class PerformanceTestVial
     }
 ```
 
+## Analyzers
+
+The package includes a Roslyn analyzer, so these warnings show up in your IDE and in `dotnet build` with no extra setup.
+
+### TV0001: Vial attribute has no Description
+
+Every vial should say what the test verifies. A vial attribute (built-in or custom) without a `Description`, or with an empty
+or whitespace one, produces warning **TV0001**:
+
+```cs
+[UnitTestVial<CartVial>]                                     // TV0001
+[UnitTestVial<CartVial>(Description = "")]                   // TV0001
+[UnitTestVial<CartVial>(Description = "Carts can have products added")]   // OK
+```
+
+`Description` is still optional for the compiler. Tools that read the attributes, such as
+[Pipette.NET](https://github.com/TestingVial/Pipette.NET), use the test method name (or the class name, for a class-level
+attribute) when it's missing.
+
+To change the severity, use `.editorconfig`, e.g. `dotnet_diagnostic.TV0001.severity = error`, or `none` to turn it off.
+
 
 ## Features
 
@@ -174,7 +208,7 @@ public class PerformanceTestVial
 - **Inheritance support** - vials are inherited by derived classes
 - **Extensible** - create your own test type vials
 - **Description support** for documenting vial purposes
-- Compatible with **.NET 9** and **.NET 10**
+- Compatible with **.NET 8**, **.NET 9** and **.NET 10**
 - Uses **C# 13.0** features
 
 ## Benefits
